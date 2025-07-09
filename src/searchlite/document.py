@@ -1,5 +1,6 @@
 from sentence_transformers import SentenceTransformer
 from sklearn.metrics.pairwise import cosine_similarity
+import numpy as np
 
 class Document():
     def __init__(self, texts, metadata, model = None):
@@ -20,6 +21,8 @@ class Document():
             raise ValueError("Text embeddings not found. Please run .embed() before querying.")
         else:
             query_embedding = self.model.encode(query_text)
-            similarities = cosine_similarity(X = self.embeddings, Y = query_embedding)
+            similarities = cosine_similarity(X = self.embeddings, Y = query_embedding) #Returns ndarray of scores
+            
+            top_indices = np.argsort(similarities)
 
     
