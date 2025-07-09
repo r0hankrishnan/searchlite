@@ -1,5 +1,7 @@
 # searchlite
 
+![searchlite logo](assets/searchlite-no-bg.svg)
+
 A simple Python package that allows semantic search on text data sets with simple syntax.
 
 ---
