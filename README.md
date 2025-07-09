@@ -93,6 +93,12 @@ This project is licensed under the MIT License.
 
 ---
 
+## A Note on AI
+
+This README was written with the help of Chat GPT. I also used Chat GPT to generate the synthetic data used in the tests and in the notebook demo. All other code was written by me!
+
+---
+
 ## Contact
 
 The repository is open on GitHub:
