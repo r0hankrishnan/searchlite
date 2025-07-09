@@ -36,18 +36,18 @@ class Document():
             
             return output_list_dicts
         
-    def display_results(self, output_list_dicts:list[dict], options:Literal["f-string", "pprint", "tabulate"]):
+    def display_results(self, output_list_dicts:list[dict], style:Literal["f-string", "pprint", "tabulate"]):
         _error_opt_list = ", ".join(["f-string", "pprint", "tabulate"])
-        if options.lower() == "f-string":
+        if style.lower() == "f-string":
             for dictionary in output_list_dicts:
                 for key,value in dictionary.items():
                     print(f"{key}: {value}", end=" | ")
                 print(" ")
         
-        elif options.lower() == "pprint":
+        elif style.lower() == "pprint":
             pprint.pprint(output_list_dicts)
             
-        elif options.lower() == "tabulate":
+        elif style.lower() == "tabulate":
             headers = output_list_dicts[0].keys()
             rows = [dictionary.values() for dictionary in output_list_dicts]
             print(tabulate.tabulate(rows, headers = headers, tablefmt = "grid"))

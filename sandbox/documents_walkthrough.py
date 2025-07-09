@@ -19,4 +19,4 @@ res = doc.query(query_text = "wireless earbuds with good battery life")
 
 res
 
-doc.display_results(res, options = "tabulate")
+doc.display_results(res, style = "tabulate")
