@@ -22,7 +22,7 @@ To get started:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/searchlite.git
+git clone https://github.com/r0hankrishnan/searchlite.git
 cd searchlite
 ````
 
