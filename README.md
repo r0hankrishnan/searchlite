@@ -112,13 +112,17 @@ This README was written with the help of Chat GPT. I also used Chat GPT to gener
 
 ## Future Plans
 
-Here are some features I'm considering for future versions of `searchlite`:
+Here are some features I'm working on adding for future versions of `searchlite`:
 
 - [ ] Support for embedding models other than "all-MiniLM-L6-v2"
+- [ ] Create "lightweight" alternative that doesn't require loading sentence-transformers
+- [ ] Support for other similarity measures
+- [ ] Implement similarity metrics from scratch and remove scikit-learn dependency
 - [ ] Support for adding normalization to models that do not automatically normalize their embeddings
 - [ ] Functions to allow for easy conversion of a pandas dataframe to a Document object
-- [ ] Support for other similarity measures
 - [ ] Support for keyword, TF-IDF, BM25, and fuzzy matching search
+- [ ] Support for weighted hybrid search
+- [ ] Support for reranking search
 - [ ] Support for built-in preprocessing of texts
 - [ ] Built-in support for filtering query results by metadata fields
 - [ ] Caching of embeddings to avoid re-computation across sessions
@@ -126,6 +130,8 @@ Here are some features I'm considering for future versions of `searchlite`:
 - [ ] Support for indexing larger datasets with Faiss or Annoy
 - [ ] Integration with Jupyter widgets for interactive exploration
 - [ ] JSON/YAML import/export for datasets and results
+- [ ] Caching for larger embedding tasks
+
 
 ---
 
