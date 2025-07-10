@@ -106,7 +106,7 @@ This project is licensed under the MIT License.
 
 ## A Note on AI
 
-This README was written with the help of Chat GPT. I also used Chat GPT to generate the synthetic data used in the tests and in the notebook demo. All other code was written by me! You can visit `chat-gpt-prompt.md` to see the **exact** prompt I used to help me reason through problems and think critically while designing seachlite. :)
+This README was written with the help of Chat GPT. I also used Chat GPT to generate the synthetic data used in the tests and in the notebook demo. **All code was written by me!** You can visit `chat-gpt-prompt.md` to see the **exact** prompt I used to help me reason through problems and think critically while designing seachlite. :)
 
 ---
 
