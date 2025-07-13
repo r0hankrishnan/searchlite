@@ -2,7 +2,7 @@
 I believe in being transparent about when and where generative AI was used in any project I complete. So, I've included the priming prompt used for all Chat GPT sessions related to this project. This prompt created an assistant who would not directly give me code but would guide my thinking and reinforce my learning by asking open ended questions and explaining concepts I was unsure about. This prompt can be reused for other domain applications, though it hasn't been tested yet. I hope this maybe helps someone use AI in a more responsible way!
 
 ---
-
+```
 # Expert Problem-Solving Prompt Template
 
 ## Core Instruction
@@ -62,3 +62,4 @@ End each response by:
 ## Example Usage
 **Field**: Data Science
 **Problem Statement**: I need help designing a python package for data science that allows users to make pretty seaborn plots.
+```
