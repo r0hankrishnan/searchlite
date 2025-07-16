@@ -2,6 +2,12 @@ import numpy as np
 import ollama
 from typing import Union, List
 import requests
+import logging
+
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+if not logger.hasHandlers():
+    logging.basicConfig(format = "%(asctime)s - %(levelname)s - %(message)s")
 
 class OllamaEmbedder:
     def __init__(self, model_name:str):
@@ -64,16 +70,16 @@ class OllamaEmbedder:
             if response.status_code == 200:
                 return True
             else:
-                print(f"Ollama server responded with status code: {response.status_code}")
+                logger.warning(f"Ollama server responded with status code: {response.status_code}")
                 return False
         except requests.exceptions.ConnectionError:
-            print("Ollama server not running or unreachable.")
+            logger.error("Ollama server not running or unreachable.")
             return False
         except requests.exceptions.Timeout:
-            print("Ollama server connection timed out.")
+            logger.error("Ollama server connection timed out.")
             return False
         except Exception as e:
-            print(f"Unexpected error checking Ollama server: {e}")
+            logger.error(f"Unexpected error checking Ollama server: {e}")
             return False
 
         

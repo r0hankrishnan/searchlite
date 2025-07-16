@@ -12,7 +12,7 @@ class SentenceTransformerEmbedder:
             from sentence_transformers import SentenceTransformer
         except ImportError:
             raise ImportError(
-                "The `sentence-transformers` package is required to use SentenceTransformerEmbedder. "
+                "The `sentence-transformers` package is required to use SentenceTransformerEmbedder."
                 "Please install it with: pip install searchlite[sentence_transformers]"
                 )
 

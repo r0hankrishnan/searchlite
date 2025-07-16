@@ -4,8 +4,13 @@ from searchlite.embedders import tfidf, base
 import pprint
 import tabulate
 from typing import Literal, Optional, Dict, List
+import logging
 
-
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+if not logger.hasHandlers():
+    logging.basicConfig(format = "%(asctime)s - %(levelname)s - %(message)s")
+    
 class Document():
     def __init__(self, texts:List[str], metadata:List[Dict], embedder:base.EmbedderProtocol = None):
         """_summary_
@@ -25,9 +30,12 @@ class Document():
             if self.embedder.fitted:
                 pass
             else:
-                print("Fitting SkTFIDFEmbedder to texts...")
-                self.embedder.fit(self.texts)
-                print("SkTFIDFEmbedder fitted.")
+                logging.info("Fitting SkTFIDFEmbedder to texts...")
+                try:
+                    self.embedder.fit(self.texts)
+                    logging.info("SkTFIDFEmbedder fitted.")
+                except Exception as e:
+                    logging.error(f"Encountered an error: {e}")
    
     def embed(self, in_memory:bool = True, vector_db:str = None) -> Optional[str]:
         """_summary_
