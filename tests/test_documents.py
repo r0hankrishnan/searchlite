@@ -15,15 +15,14 @@ def test_initialization():
     assert(doc.texts == sample_texts.tolist())
     assert(doc.metadata == sample_metadata)
     assert(doc.embeddings == None)
-    
-    
-def test_embedding():
+      
+def test_default_embedding():
     doc = Document(texts = sample_texts, metadata = sample_metadata)
     doc.embed()
     assert(doc.embeddings is not None)
     assert(len(doc.embeddings) == len(sample_texts))
     
-def test_query():
+def test_default_query():
     doc = Document(texts = sample_texts, metadata = sample_metadata)
     doc.embed()
     res = doc.query(query_text = "wireless earbuds with good battery life")
@@ -31,6 +30,16 @@ def test_query():
     assert(len(res) == 3)
     assert all("text" in r for r in res)
     assert all("id" in r for r in res)
+    
+def test_ollama_embedding(): # Make sure ollama is running before running pytest
+    ...
+
+def test_sentence_transformers_embedding():
+    ...
+
+def test_api_embedding():
+    ...
+
     
 def test_query_error_if_not_embedded():
     doc = Document(texts = sample_texts, metadata = sample_metadata)
@@ -60,3 +69,4 @@ def test_display_invalid_option():
     res = doc.query(query_text = "wireless earbuds with good battery life")
     with pytest.raises(ValueError):
         doc.display_results(res, "other")
+        
