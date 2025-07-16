@@ -4,16 +4,12 @@
 
 A simple Python package that allows semantic search on text data sets with simple syntax.
 
----
-
 ## Features
 
 - Easily embed and index collections of texts with sentence-transformers
 - Query with natural language to find the most semantically similar texts
 - Display results with multiple formatting options (`f-string`, `pprint`, `tabulate`)
 - Lightweight and minimal dependencies
-
----
 
 ## Installation
 
@@ -35,8 +31,6 @@ pip install -r requirements.txt
 ```
 
 > **Note:** The `sentence-transformers` library currently requires `numpy` version less than 2. Please ensure you have `numpy<2` installed to avoid compatibility issues.
-
----
 
 ## Usage Example
 
@@ -71,24 +65,42 @@ doc.display_results(res, options="tabulate")
 +======+=====================+===============================================================================================================================================================================+
 |    1 | Product Description | Experience unparalleled sound quality with the EchoSphere wireless earbuds, featuring noise cancellation, 12-hour battery life, and an ergonomic design perfect for workouts. |
 +------+---------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|    5 | Travel Guide        | Discover the hidden gems of Kyoto, from tranquil temples to bustling markets, and experience authentic Japanese culture like never before.                                    |
+|   11 | Customer Review     | The blender exceeded my expectations with its powerful motor and easy-to-clean design. Perfect for smoothies and soups!                                                       |
 +------+---------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-|    4 | Recipe              | Preheat the oven to 375°F. Mix flour, sugar, and eggs in a bowl, then fold in fresh blueberries. Bake for 25 minutes or until golden brown.                                   |
+|   14 | E-commerce FAQ      | Q: Does this jacket have waterproof capabilities? A: Yes, it is made with breathable waterproof fabric suitable for heavy rain.                                               |
 +------+---------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 ```
----
 
 ## Requirements
 
-* Python 3.7+
-* `sentence-transformers`
-* `numpy < 2`
-* `scikit-learn`
-* `tabulate`
+* Python 3.7 or higher
+* Core dependencies:
 
-You can find the full list in `requirements.txt`.
+  * `numpy < 2`
+  * `scikit-learn >= 1.0`
+  * `tabulate >= 0.8.0`
+  * `pandas >= 1.0`
 
----
+* Optional dependencies:
+
+  * Sentence Transformers
+    * `sentence-transformers >= 2.2.0`
+  * Dev
+    * `pytest`
+
+You can find the full list in [`requirements.txt`](requirements.txt) and [`requirements_optional.txt`](requirements_optional.txt).
+
+**Note:** If you want to use SentenceTransformer-based embeddings, you’ll need to install the optional dependency:
+
+```bash
+pip install searchlite[sentence_transformers]
+```
+
+Or, install manually:
+
+```bash
+pip install -r requirements_optional.txt
+```
 
 ## Contributing
 
@@ -96,19 +108,13 @@ Contributions are welcome! Whether it's bug reports, feature requests, or pull r
 
 This is my first Python package project, built as a learning experience, so I truly appreciate constructive feedback and ideas for improvement.
 
----
-
 ## License
 
 This project is licensed under the MIT License.
 
----
-
 ## A Note on AI
 
 This README was written with the help of Chat GPT. I also used Chat GPT to generate the synthetic data used in the tests and in the notebook demo. **All code was written by me!** You can visit `chat-gpt-prompt.md` to see the **exact** prompt I used to help me reason through problems and think critically while designing seachlite. :)
-
----
 
 ## Future Plans
 
@@ -138,9 +144,6 @@ Here are some features I'm working on adding for future versions of `searchlite`
 - [ ] JSON/YAML import/export for datasets and results
 - [ ] Caching for larger embedding tasks
 
-
----
-
 ## Contact
 
 The repository is open on GitHub:
@@ -148,6 +151,5 @@ The repository is open on GitHub:
 
 Feel free to open issues or reach out with questions or suggestions!
 
----
 
 Thank you for checking out **searchlite**!
