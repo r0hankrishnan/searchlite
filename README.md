@@ -6,10 +6,14 @@ A simple Python package that allows semantic search with simple syntax on **smal
 
 ## Features
 
-- Easily embed and index collections of texts with sentence-transformers
+- Easily embed and index collections of texts with a variety of embedding methods:
+  - scikit-learn's TFIDF
+  - Any embedding model from Ollama
+  - Any embedding model from the sentence_transformers package
+  - Any API-based embedding workflow
 - Query with natural language to find the most semantically similar texts
 - Display results with multiple formatting options (`f-string`, `pprint`, `tabulate`)
-- Lightweight and minimal dependencies
+- Lightweight and minimal dependencies by default
 
 ## Scaling Considerations
 
