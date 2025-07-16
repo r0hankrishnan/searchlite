@@ -2,7 +2,7 @@
 
 ![searchlite logo](assets/searchlite-no-bg.svg)
 
-A simple Python package that allows semantic search on small text data sets with simple syntax.
+A simple Python package that allows semantic search with simple syntax on **small** text data sets.
 
 ## Features
 
@@ -10,6 +10,36 @@ A simple Python package that allows semantic search on small text data sets with
 - Query with natural language to find the most semantically similar texts
 - Display results with multiple formatting options (`f-string`, `pprint`, `tabulate`)
 - Lightweight and minimal dependencies
+
+## Scaling Considerations
+
+`searchlite` is intentionally designed for **lightweight semantic search** on **small to moderately sized** text datasets that fit in memory. It excels in use cases like:
+
+* Prototyping search workflows
+* Performing quick, local experiments
+* Building educational or notebook-based tools
+* Evaluating embedding strategies
+
+Because embeddings are stored in memory using NumPy arrays, `searchlite` is **not optimized for large-scale corpora or long-term persistence**.
+
+## Working with Large Datasets?
+
+If you're working with large text datasets or need production-grade semantic search with features like:
+
+* Efficient vector indexing
+* Disk-based or cloud-based storage
+* Scalable nearest neighbor search
+* Metadata filtering and advanced retrieval
+
+You should consider using a dedicated vector database such as:
+
+* [Chroma](https://www.trychroma.com/)
+* [FAISS](https://github.com/facebookresearch/faiss)
+* [Pinecone](https://www.pinecone.io/)
+* [Weaviate](https://weaviate.io/)
+* [Qdrant](https://qdrant.tech/)
+
+These libraries offer Python SDKs and built-in support for embedding and querying at scale.
 
 ## Installation
 
@@ -85,12 +115,16 @@ doc.display_results(res, options="tabulate")
 
   * Sentence Transformers
     * `sentence-transformers >= 2.2.0`
+  * Ollama
+    * `ollama`
   * Dev
     * `pytest`
 
-You can find the full list in [`requirements.txt`](requirements.txt) and [`requirements_optional.txt`](requirements_optional.txt).
+You can find the full list in [setup.py](setup.py) or [pyproject.toml](pyproject.toml).
 
-**Note:** If you want to use SentenceTransformer-based embeddings, you’ll need to install the optional dependency:
+**Note:** 
+
+If you want to use SentenceTransformer-based embeddings, you’ll need to install the optional dependency:
 
 ```bash
 pip install searchlite[sentence_transformers]
@@ -99,7 +133,19 @@ pip install searchlite[sentence_transformers]
 Or, install manually:
 
 ```bash
-pip install -r requirements_optional.txt
+pip install -r requirements_st.txt
+```
+
+If you want to use Ollama-based embeddings, you'll need to install the optional dependency:
+
+```bash
+pip install searchlite[ollama]
+```
+
+Or, install manually:
+
+```bash
+pip install -r requirements_ollama.txt
 ```
 
 ## Contributing
@@ -114,7 +160,7 @@ This project is licensed under the MIT License.
 
 ## A Note on AI
 
-This README was written with the help of Chat GPT. I also used Chat GPT to generate the synthetic data used in the tests and in the notebook demo. **All code was written by me!** You can visit `chat-gpt-prompt.md` to see the **exact** prompt I used to help me reason through problems and think critically while designing seachlite. :)
+This README was written with the help of Chat GPT. I also used Chat GPT to generate the synthetic data used in the tests and in the notebook demo. **All code, however, was written by me!** I strongly believe in transparency when it comes to the use of generative AI. In that spirit, you can visit [chat-gpt-prompt.md](chat-gpt-prompt.md) to see the **exact** prompt I used to help me reason through problems and think critically while designing seachlite. :)
 
 ## Future Plans
 
@@ -130,6 +176,7 @@ Here are some features I'm working on adding for future versions of `searchlite`
     - [x] Sentence Transformers
     - [ ] API
     - [ ] TFIDF (from scratch)
+- [ ] Batching
 - [ ] Support for adding normalization to models that do not automatically normalize their embeddings
 - [ ] Functions to allow for easy conversion of a pandas dataframe to a Document object
 - [ ] Support for keyword, TF-IDF, BM25, and fuzzy matching search
@@ -139,7 +186,6 @@ Here are some features I'm working on adding for future versions of `searchlite`
 - [ ] Built-in support for filtering query results by metadata fields
 - [ ] Caching of embeddings to avoid re-computation across sessions
 - [ ] CLI interface for querying datasets without writing code
-- [ ] Support for indexing larger datasets with Faiss or Annoy
 - [ ] Integration with Jupyter widgets for interactive exploration
 - [ ] JSON/YAML import/export for datasets and results
 - [ ] Caching for larger embedding tasks

@@ -29,7 +29,7 @@ class Document():
                 self.embedder.fit(self.texts)
                 print("SkTFIDFEmbedder fitted.")
    
-    def embed(self) -> Optional[str]:
+    def embed(self, in_memory:bool = True, vector_db:str = None) -> Optional[str]:
         """_summary_
 
         Returns:
@@ -65,10 +65,11 @@ class Document():
             
             top_indices = np.argsort(similarities)[0][::-1][0:top_k]
             
+            top_scores = [similarities[0][idx] for idx in top_indices]
             top_texts = [self.texts[idx] for idx in top_indices]
             top_metadata = [self.metadata[idx] for idx in top_indices]
             
-            output_list_dicts = self._create_output_dict(top_texts, top_metadata) 
+            output_list_dicts = self._create_output_dict(top_texts, top_metadata, top_scores) 
             
             return output_list_dicts
         
@@ -85,13 +86,13 @@ class Document():
         Returns:
             _type_: _description_
         """
-        
+
         if style.lower() == "f-string":
-            for dictionary in output_list_dicts:
-                for key,value in dictionary.items():
-                    print(f"{key}: {value}", end=" | ")
-                print(" ")
-            
+            for i, dictionary in enumerate(output_list_dicts, 1):
+                print(f"Result {i}:")
+                for key, value in dictionary.items():
+                    print(f"    {key}: {value}")
+                print()
             return None
         
         elif style.lower() == "pprint":
@@ -108,7 +109,7 @@ class Document():
             _error_opt_list = ", ".join(["f-string", "pprint", "tabulate"])
             raise ValueError(f"Expected options to be one of {_error_opt_list}")
 
-    def _create_output_dict(self, top_texts:List[str], top_metadata:Dict) -> List[Dict]:
+    def _create_output_dict(self, top_texts:List[str], top_metadata:Dict, top_scores:List[float]) -> List[Dict]:
         """_summary_
 
         Args:
@@ -123,6 +124,7 @@ class Document():
         for dictionary in final_output:
             idx = top_metadata.index(dictionary)
             dictionary["text"] = top_texts[idx]
+            dictionary["similarity score"] = top_scores[idx]
             
         return final_output
     

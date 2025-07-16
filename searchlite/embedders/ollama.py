@@ -36,7 +36,7 @@ class OllamaEmbedder:
         if isinstance(texts, list):
             embeddings = []
             for idx, doc in enumerate(texts):
-                response = ollama.embed(model = self.model_name, input = texts)
+                response = ollama.embed(model = self.model_name, input = doc)
                 embedding = response["embeddings"]
                 embedding = np.squeeze(embedding, axis = 0)
                 embeddings.append(embedding)
