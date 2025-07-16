@@ -1,12 +1,11 @@
 [project]
 name = "searchlite"
-version = "0.1.0"
-description = "A lightweight semantic search engine for small text datasets"
+version = "0.2.0"
+description = "A simple Python package that allows semantic search with simple syntax on small text data sets."
 authors = [{ name = "Rohan Krishnan", email = "your.email@example.com" }]
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
-    "sentence-transformers>=2.2.2",
     "scikit-learn>=1.0",
     "pandas>=1.5",
     "tabulate>=0.8.9",
@@ -19,7 +18,9 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project.optional-dependencies]
-dev = ["pytest"]
+ollama = ["ollama"]
+sentence_transformers = ["sentence-transformers>=2.2.2"]
+dev = ["pytest", "nbformat"]
 
 [tool.setuptools]
 packages = ["searchlite"]
