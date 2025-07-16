@@ -138,4 +138,5 @@ class Document():
     
     def __repr__(self):
         embeddings_ready = "Ready" if self.embeddings is not None else "Not Ready"
-        return f"Document instance with {len(self.texts)} texts. Metadata contains the following fields: {', '.join(list(self.metadata[0].keys()))}. Embeddings: {embeddings_ready}."
+        embedder_desc = self.embedder
+        return f"Document instance with {len(self.texts)} texts. Metadata contains the following fields: {', '.join(list(self.metadata[0].keys()))}. Embeddings: {embeddings_ready}.\nEmbedder:{embedder_desc}"
