@@ -20,7 +20,7 @@ build-backend = "setuptools.build_meta"
 [project.optional-dependencies]
 ollama = ["ollama"]
 sentence_transformers = ["sentence-transformers>=2.2.2"]
-dev = ["pytest"]
+dev = ["pytest", "nbformat"]
 
 [tool.setuptools]
 packages = ["searchlite"]

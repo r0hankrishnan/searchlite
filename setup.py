@@ -13,7 +13,7 @@ setup(
         "pandas>=1.0"
     ],
     extras_require={
-    "dev": ["pytest"],
+    "dev": ["pytest", "nbformat"],
     "sentence_transformers": ["sentence-transformers>=2.2.0"],
     "ollama": ["ollama"]
     },
