@@ -114,10 +114,16 @@ This README was written with the help of Chat GPT. I also used Chat GPT to gener
 
 Here are some features I'm working on adding for future versions of `searchlite`:
 
-- [ ] Support for embedding models other than "all-MiniLM-L6-v2"
-- [ ] Create "lightweight" alternative that doesn't require loading sentence-transformers
+- [x] Support for embedding models other than "all-MiniLM-L6-v2"
+- [x] Create "lightweight" alternative that doesn't require loading sentence-transformers
 - [ ] Support for other similarity measures
-- [ ] Implement similarity metrics from scratch and remove scikit-learn dependency
+    - [ ] Implement similarity metrics from scratch and remove scikit-learn dependency
+- [ ] Other embedding type supports
+    - [x] TFIDF (sklearn)
+    - [x] Ollama
+    - [x] Sentence Transformers
+    - [ ] API
+    - [ ] TFIDF (from scratch)
 - [ ] Support for adding normalization to models that do not automatically normalize their embeddings
 - [ ] Functions to allow for easy conversion of a pandas dataframe to a Document object
 - [ ] Support for keyword, TF-IDF, BM25, and fuzzy matching search
