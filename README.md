@@ -172,26 +172,27 @@ Here are some features I'm working on adding for future versions of `searchlite`
 
 - [x] Support for embedding models other than "all-MiniLM-L6-v2"
 - [x] Create "lightweight" alternative that doesn't require loading sentence-transformers
-- [ ] Support for other similarity measures
-    - [ ] Implement similarity metrics from scratch and remove scikit-learn dependency
-    - [ ] TFIDF (from scratch)
 - [x] Other embedding type supports
     - [x] TFIDF (sklearn)
     - [x] Ollama
     - [x] Sentence Transformers
     - [x] API
-- [ ] Batching
-- [ ] Support for adding normalization to models that do not automatically normalize their embeddings
 - [ ] Functions to allow for easy conversion of a pandas dataframe to a Document object
-- [ ] Support for keyword, TF-IDF, BM25, and fuzzy matching search
+  - [ ] Use @classmethod
+- [ ] JSON/YAML import/export for datasets and results
+- [ ] Support for other similarity measures
+    - [ ] Implement similarity metrics from scratch and remove scikit-learn dependency
+    - [ ] TFIDF (from scratch)
+- [ ] Support for built-in preprocessing of texts
+- [ ] Support for checking and adding normalization to embeddings
+- [ ] Built-in support for filtering query results by metadata fields
+- [ ] Batching
+- [ ] Support for keyword, BM25, and fuzzy matching search
 - [ ] Support for weighted hybrid search
 - [ ] Support for reranking search
-- [ ] Support for built-in preprocessing of texts
-- [ ] Built-in support for filtering query results by metadata fields
 - [ ] Caching of embeddings to avoid re-computation across sessions
 - [ ] CLI interface for querying datasets without writing code
 - [ ] Integration with Jupyter widgets for interactive exploration
-- [ ] JSON/YAML import/export for datasets and results
 - [ ] Caching for larger embedding tasks
 
 ## Contact
