@@ -174,12 +174,12 @@ Here are some features I'm working on adding for future versions of `searchlite`
 - [x] Create "lightweight" alternative that doesn't require loading sentence-transformers
 - [ ] Support for other similarity measures
     - [ ] Implement similarity metrics from scratch and remove scikit-learn dependency
-- [ ] Other embedding type supports
+    - [ ] TFIDF (from scratch)
+- [x] Other embedding type supports
     - [x] TFIDF (sklearn)
     - [x] Ollama
     - [x] Sentence Transformers
-    - [ ] API
-    - [ ] TFIDF (from scratch)
+    - [x] API
 - [ ] Batching
 - [ ] Support for adding normalization to models that do not automatically normalize their embeddings
 - [ ] Functions to allow for easy conversion of a pandas dataframe to a Document object
