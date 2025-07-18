@@ -1,9 +1,10 @@
 import numpy as np
+import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 from searchlite.embedders import tfidf, base
 import pprint
 import tabulate
-from typing import Literal, Optional, Dict, List
+from typing import Literal, Optional, Dict, List, Union
 import logging
 
 logger = logging.getLogger(__name__)
@@ -12,7 +13,7 @@ if not logger.hasHandlers():
     logging.basicConfig(format = "%(asctime)s - %(levelname)s - %(message)s")
     
 class Document():
-    def __init__(self, texts:List[str], metadata:List[Dict], embedder:base.EmbedderProtocol = None):
+    def __init__(self, texts:List[str], metadata:List[Dict], embedder:Optional[base.EmbedderProtocol] = None):
         """_summary_
 
         Args:
@@ -25,6 +26,10 @@ class Document():
         self.metadata = metadata
         self.embeddings = None
         self.embedder = embedder or tfidf.SkTFIDFEmbedder()
+                
+        if embedder is not None and not isinstance(embedder, base.EmbedderProtocol):
+            raise TypeError("Embedder must be an instance of EmbedderProtocol or None")
+
         
         if isinstance(self.embedder, tfidf.SkTFIDFEmbedder):
             if self.embedder.fitted:
@@ -35,7 +40,8 @@ class Document():
                     self.embedder.fit(self.texts)
                     logging.info("SkTFIDFEmbedder fitted.")
                 except Exception as e:
-                    logging.error(f"Encountered an error: {e}")
+                    logging.exception(f"Encountered an error: {e}")
+                    raise
    
     def embed(self, in_memory:bool = True, vector_db:str = None) -> Optional[str]:
         """_summary_
@@ -52,6 +58,7 @@ class Document():
             return None
     
     def query(self, query_text:str, top_k:int = 3) -> List[Dict]:
+        import copy
         """_summary_
 
         Args:
@@ -74,8 +81,8 @@ class Document():
             top_indices = np.argsort(similarities)[0][::-1][0:top_k]
             
             top_scores = [similarities[0][idx] for idx in top_indices]
-            top_texts = [self.texts[idx] for idx in top_indices]
-            top_metadata = [self.metadata[idx] for idx in top_indices]
+            top_texts = [copy.deepcopy(self.texts[idx]) for idx in top_indices] # Have to use deepcopy because attributes are mutable - a normal copy will still push any changes back to original attribute
+            top_metadata = [copy.deepcopy(self.metadata[idx]) for idx in top_indices]
             
             output_list_dicts = self._create_output_dict(top_texts, top_metadata, top_scores) 
             
@@ -116,7 +123,49 @@ class Document():
         else:
             _error_opt_list = ", ".join(["f-string", "pprint", "tabulate"])
             raise ValueError(f"Expected options to be one of {_error_opt_list}")
+        
+    @classmethod
+    def from_csv(cls, path:str, text_columns:Union[str, List[str]], metadata_columns:Union[str,List[str]], embedder:Optional[base.EmbedderProtocol] = None) -> "Document":        
+        # Read in csv
+        df = pd.read_csv(path)
+        
+        return cls._from_dataframe(df = df, text_columns = text_columns, metadata_columns = metadata_columns, embedder = embedder)
+    
+    @classmethod
+    def from_pandas(cls, df, text_columns:Union[str,List[str]], metadata_columns:Union[str, List[str]], embedder:Optional[base.EmbedderProtocol]):
+        return cls._from_dataframe(df = df, text_columns = text_columns, metadata_columns = metadata_columns, embedder = embedder)
+    
+    @classmethod
+    def _from_dataframe(cls, df, text_columns:Union[str,List[str]], metadata_columns:Union[str, List[str]], embedder:Optional[base.EmbedderProtocol]):
+        
+        try:
+            df[text_columns]
+        except KeyError as e:
+            logger.error(f"One of the column names you passed is invalid: {e}")
+        except Exception as e:
+            logger.error(f"Something went wrong: {e}")
+            
+        try:
+            df[metadata_columns]
+        except KeyError as e:
+            logger.error(f"One of the metadata names you passed is invalid: {e}")
+        except Exception as e:
+            logger.error(f"Something went worng: {e}")
+        
+        # Check type conformity for text column input
+        if isinstance(text_columns, list) and len(text_columns) > 1:
+            df["doc_texts"] = df[text_columns].apply(lambda row: " ".join(row.astype(str)), axis = 1)
+        else:
+            df["doc_texts"] = df[text_columns]
 
+        if isinstance(metadata_columns, str):
+            metadata_columns = [metadata_columns]
+        
+        doc_texts = df["doc_texts"]
+        doc_metadata = df[metadata_columns].to_dict(orient = "records")
+        
+        return cls(texts = doc_texts, metadata = doc_metadata, embedder = embedder)
+    
     def _create_output_dict(self, top_texts:List[str], top_metadata:Dict, top_scores:List[float]) -> List[Dict]:
         """_summary_
 
@@ -127,7 +176,7 @@ class Document():
         Returns:
             List[Dict]: _description_
         """
-        
+
         final_output = top_metadata
         for dictionary in final_output:
             idx = top_metadata.index(dictionary)
