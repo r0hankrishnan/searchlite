@@ -177,22 +177,21 @@ Here are some features I'm working on adding for future versions of `searchlite`
     - [x] Ollama
     - [x] Sentence Transformers
     - [x] API
+- [ ] Keyword search support
+    - [x] TFIDF
+    - [ ] BM25
+    - [ ] Fuzzy matching
 - [ ] Functions to allow for easy conversion of a pandas dataframe to a Document object
   - [ ] Use @classmethod
 - [ ] JSON/YAML import/export for datasets and results
 - [ ] Support for other similarity measures
-    - [ ] Implement similarity metrics from scratch and remove scikit-learn dependency
+    - [ ] Implement similarity metrics from scratch and remove scikit-learn dependency (?)
     - [ ] TFIDF (from scratch)
 - [ ] Support for built-in preprocessing of texts
 - [ ] Support for checking and adding normalization to embeddings
 - [ ] Built-in support for filtering query results by metadata fields
 - [ ] Batching
-- [ ] Support for keyword, BM25, and fuzzy matching search
-- [ ] Support for weighted hybrid search
-- [ ] Support for reranking search
 - [ ] Caching of embeddings to avoid re-computation across sessions
-- [ ] CLI interface for querying datasets without writing code
-- [ ] Integration with Jupyter widgets for interactive exploration
 - [ ] Caching for larger embedding tasks
 
 ## Contact
