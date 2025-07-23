@@ -1,6 +1,7 @@
-from typing import Protocol, List, Union
+from typing import Protocol, List, Union, runtime_checkable
 import numpy as np
 
+@runtime_checkable
 class EmbedderProtocol(Protocol):
     """_summary_
 
