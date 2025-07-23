@@ -24,3 +24,4 @@ dev = ["pytest", "nbformat"]
 
 [tool.setuptools.packages.find]
 where = ["."]
+include = ["searchlite*"]
