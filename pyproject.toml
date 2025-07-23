@@ -22,6 +22,5 @@ ollama = ["ollama"]
 sentence_transformers = ["sentence-transformers>=2.2.2"]
 dev = ["pytest", "nbformat"]
 
-[tool.setuptools]
-packages = ["searchlite"]
-include-package-data = true
+[tool.setuptools.packages.find]
+where = ["."]
